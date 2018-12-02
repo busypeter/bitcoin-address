@@ -1,4 +1,4 @@
-param([string] $privKey)
+param([string] $pubKey)
 
 function toBase58([byte[]] $inputByteArray)
 {
@@ -43,7 +43,7 @@ $sbSha256 = New-Object System.Text.StringBuilder
 $sbRipemd160 = New-Object System.Text.StringBuilder
 $sbFinal = New-Object System.Text.StringBuilder
     
-$byteArray = $uncompressedKeyPrefix + [System.Text.Encoding]::UTF8.GetBytes($privKey)
+$byteArray = $uncompressedKeyPrefix + [System.Text.Encoding]::UTF8.GetBytes($pubKey)
 $byteArray = $sha256.ComputeHash($byteArray)
 $byteArray | %{[Void]$sbSha256.Append($_.ToString("x2"))}
 "sha256 - " + $sbSha256.ToString()
